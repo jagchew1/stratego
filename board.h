@@ -20,7 +20,7 @@ public:
     void load(Color col1 = Color::White, Color col2 = Color::Black);
 
 private:
-    array<RectangleShape, 64> m_boardSquares;
+    array<RectangleShape, 100> m_boardSquares;
 
     virtual void draw(RenderTarget &target, RenderStates states) const;
 };

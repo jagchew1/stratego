@@ -6,6 +6,7 @@ using namespace sf;
 
 int main()
 {
+
     CircleShape shape;
     shape.setRadius(40.f);
     shape.setPosition(100.f, 100.f);
