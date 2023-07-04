@@ -6,8 +6,7 @@ using namespace sf;
 
 int main()
 {
-    Board gameboard;
-    gameboard.load();
+    Board gameboard(Color::White, Color::Black);
 
     RenderWindow window(
             sf::VideoMode(1000, 1000),
