@@ -6,24 +6,25 @@ using namespace sf;
 
 int main()
 {
+    Board gameboard;
+    gameboard.load();
 
-    CircleShape shape;
-    shape.setRadius(40.f);
-    shape.setPosition(100.f, 100.f);
-    shape.setFillColor(sf::Color::Cyan);
+    RenderWindow window(
+            sf::VideoMode(1000, 1000),
+            "Stratego");
 
     while (window.isOpen())
     {
-        Event event;
-
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
+        sf::Event event;
+        while (
+                window.pollEvent(event))
+            if (event.type ==
+                sf::Event::Closed)
                 window.close();
-        }
 
         window.clear();
-        window.draw(shape);
+        gameboard.drawIt(window, RenderStates::Default);
         window.display();
     }
+    return 0;
 }

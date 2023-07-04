@@ -19,6 +19,10 @@ public:
 
     void load(Color col1 = Color::White, Color col2 = Color::Black);
 
+    void drawIt(RenderTarget& target, RenderStates states) const{
+        this->draw(target, states);
+    }
+
 private:
     array<RectangleShape, 100> m_boardSquares;
 
