@@ -1,75 +1,42 @@
 #include <SFML/Graphics.hpp>
 #include "board.h"
 #include "piece.h"
+#include "strategoGame.h"
 
 using namespace std;
 using namespace sf;
 
-int main()
-{
-    Board gameboard(Color::White, Color::Black);
-    Piece test_piece[100];
-    for(int i=0; i<100; i++){
-        test_piece[i].setPlayer((i+1)%2);
-        switch(i%12) {
-            case 1:
-                test_piece[i].setType('1');
-                break;
-            case 2:
-                test_piece[i].setType('2');
-                break;
-            case 3:
-                test_piece[i].setType('3');
-                break;
-            case 4:
-                test_piece[i].setType('4');
-                break;
-            case 5:
-                test_piece[i].setType('5');
-                break;
-            case 6:
-                test_piece[i].setType('6');
-                break;
-            case 7:
-                test_piece[i].setType('7');
-                break;
-            case 8:
-                test_piece[i].setType('8');
-                break;
-            case 9:
-                test_piece[i].setType('9');
-                break;
-            case 10:
-                test_piece[i].setType('S');
-                break;
-            case 11:
-                test_piece[i].setType('B');
-                break;
-            default:
-                test_piece[i].setType('F');
-        }
-        test_piece[i].setPosition(i);
-    }
+int main(){
+    StrategoGame stratego;
 
-    RenderWindow window(
-            sf::VideoMode(1000, 1000),
-            "Stratego");
+    sf::RenderWindow window(sf::VideoMode(1000,1000), "Stratego", sf::Style::Titlebar | sf::Style::Close);
+    window.setVerticalSyncEnabled(true);
 
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (
-                window.pollEvent(event))
-            if (event.type ==
-                sf::Event::Closed)
+    while(window.isOpen()){
+
+        Event event;
+
+        while(window.pollEvent(event)){
+
+            if(event.type == Event::Closed)
                 window.close();
 
-        window.clear();
-        gameboard.drawIt(window, RenderStates::Default);
-        for(int i=0; i<100; i++){
-            test_piece[i].drawIt(window, RenderStates::Default);
+            if(event.type == Event::MouseButtonPressed){
+                if(event.mouseButton.button == Mouse::Left){
+                    if((0 <= event.mouseButton.x) && (event.mouseButton.x <= 1000) && (0 <= event.mouseButton.y) && (event.mouseButton.y <= 1000)){
+                        unsigned int buttonPos{(event.mouseButton.x/100) + ((event.mouseButton.y/100) * (10 * (1000/window.getSize().y)))};
+
+                        if(!stratego.getSelected())
+                            stratego.selectPiece(buttonPos);
+                        else
+                            stratego.moveSelected(buttonPos);
+                    }
+                }
+            }
         }
+
+        window.draw(stratego);
         window.display();
+        cout << stratego.getGameOver() << endl;
     }
-    return 0;
 }

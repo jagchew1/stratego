@@ -8,8 +8,8 @@ void Piece::setPiece(char type, bool player, int pos, bool moved){
     setType(type);
     setPlayer(player);
     setPosition(pos);
-    setMoved(moved);
     this->setTexture();
+    move();
 }
 
 string Piece::toString() const{
