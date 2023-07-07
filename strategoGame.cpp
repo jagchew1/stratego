@@ -222,6 +222,8 @@ void StrategoGame::moveSelected(int pos){
                     }else if(bluePieces[i].getType()=='F'){ //if flag
                         bluePieces[i].setPosition(-1);
                         gameIsOver();
+                    }else if(bluePieces[i].getType()=='1' && selectedPiece->getType()=='S'){ //if spy & 1
+                        bluePieces[i].setPosition(-1);
                     }else{ //if number/spy
                         if(bluePieces[i].getType()>selectedPiece->getType()){
                             bluePieces[i].setPosition(-1);
@@ -246,6 +248,8 @@ void StrategoGame::moveSelected(int pos){
                     }else if(redPieces[i].getType()=='F'){ //if flag
                         redPieces[i].setPosition(-1);
                         gameIsOver();
+                    }else if(redPieces[i].getType()=='1' && selectedPiece->getType()=='S'){ //if spy & 1
+                        redPieces[i].setPosition(-1);
                     }else{ //if number/spy
                         if(redPieces[i].getType()>selectedPiece->getType()){
                             redPieces[i].setPosition(-1);
